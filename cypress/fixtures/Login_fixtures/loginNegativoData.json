@@ -1,0 +1,11 @@
+{
+  "usuarioValido": "standard_user",
+  "senhaValida": "secret_sauce",
+  "usuarioInvalido": "usuario_invalido",
+  "senhaInvalida": "senha_invalida",
+  "usuarioBloqueado": "locked_out_user",
+  "mensagemErroCredenciais": "Epic sadface: Username and password do not match any user in this service",
+  "mensagemErroUsuarioObrigatorio": "Epic sadface: Username is required",
+  "mensagemErroSenhaObrigatoria": "Epic sadface: Password is required",
+  "mensagemErroUsuarioBloqueado": "Epic sadface: Sorry, this user has been locked out."
+}
