@@ -25,14 +25,15 @@ pipeline {
 
     stage('Run Cypress Tests') {
       steps {
-        bat 'npx cypress run'
+        bat 'npx cypress run --browser electron --reporter junit --reporter-options "mochaFile=results/test-results-[hash].xml,toConsole=true"'
       }
     }
   }
 
   post {
     always {
-      archiveArtifacts artifacts: 'cypress/screenshots/**/*,cypress/videos/**/*', allowEmptyArchive: true
+      junit testResults: 'results/*.xml', allowEmptyResults: true
+      archiveArtifacts artifacts: 'results/*.xml,cypress/screenshots/**/*,cypress/videos/**/*', allowEmptyArchive: true
     }
   }
 }
