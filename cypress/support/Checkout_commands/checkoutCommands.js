@@ -35,3 +35,13 @@ Cypress.Commands.add('cancelCheckoutOverview', () => {
 Cypress.Commands.add('assertCheckoutComplete', () => {
   checkoutCompletePage.validarCompraConcluida()
 })
+
+Cypress.Commands.add('assertCheckoutTotal', () => {
+  checkoutStepTwoPage.obterSubtotal().then((subtotal) => {
+    checkoutStepTwoPage.obterTaxa().then((taxa) => {
+      checkoutStepTwoPage.obterTotal().then((total) => {
+        expect(total).to.eq(Number((subtotal + taxa).toFixed(2)))
+      })
+    })
+  })
+})

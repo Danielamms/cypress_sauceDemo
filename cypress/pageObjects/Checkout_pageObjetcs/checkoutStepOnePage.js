@@ -20,9 +20,13 @@ class CheckoutStepOnePage {
   }
 
   preencherDados({ firstName = '', lastName = '', postalCode = '' }) {
-    this.inputFirstName().clear().type(firstName)
-    this.inputLastName().clear().type(lastName)
-    this.inputPostalCode().clear().type(postalCode)
+    this.inputFirstName().clear()
+    this.inputLastName().clear()
+    this.inputPostalCode().clear()
+
+    if (firstName) this.inputFirstName().type(firstName)
+    if (lastName) this.inputLastName().type(lastName)
+    if (postalCode) this.inputPostalCode().type(postalCode)
   }
 
   continuar() {
