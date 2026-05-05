@@ -3,6 +3,7 @@ pipeline {
 
   options {
     timestamps()
+    skipDefaultCheckout(true)
   }
 
   environment {
@@ -10,6 +11,14 @@ pipeline {
   }
 
   stages {
+    stage('Checkout Code') {
+      steps {
+        deleteDir()
+        checkout scm
+        bat 'git rev-parse --short HEAD'
+      }
+    }
+
     stage('Install Dependencies') {
       steps {
         bat 'npm ci'
@@ -25,7 +34,8 @@ pipeline {
 
     stage('Run Cypress Tests') {
       steps {
-        bat 'if not exist results mkdir results'
+        bat 'if exist results rmdir /s /q results'
+        bat 'mkdir results'
         bat 'npx cypress run --browser electron --headless --reporter junit --reporter-options "mochaFile=results/test-results-[hash].xml,toConsole=true"'
       }
     }
