@@ -40,6 +40,9 @@ Cypress.Commands.add('assertCheckoutTotal', () => {
   checkoutStepTwoPage.obterSubtotal().then((subtotal) => {
     checkoutStepTwoPage.obterTaxa().then((taxa) => {
       checkoutStepTwoPage.obterTotal().then((total) => {
+        expect(subtotal, 'subtotal do checkout').to.be.a('number').and.not.satisfy(Number.isNaN)
+        expect(taxa, 'taxa do checkout').to.be.a('number').and.not.satisfy(Number.isNaN)
+        expect(total, 'total do checkout').to.be.a('number').and.not.satisfy(Number.isNaN)
         expect(total).to.eq(Number((subtotal + taxa).toFixed(2)))
       })
     })

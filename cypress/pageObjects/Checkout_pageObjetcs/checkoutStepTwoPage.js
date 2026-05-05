@@ -24,7 +24,13 @@ class CheckoutStepTwoPage {
   }
 
   valorMonetarioDoTexto(texto) {
-    const valorTexto = (texto.match(/\$([0-9]+(?:\.[0-9]{2})?)/) || [])[1]
+    const textoNormalizado = String(texto).replace(',', '.')
+    const valorTexto = (textoNormalizado.match(/([0-9]+(?:\.[0-9]{1,2})?)/) || [])[1]
+
+    if (!valorTexto) {
+      throw new Error(`Nao foi possivel extrair valor monetario do texto: "${texto}"`)
+    }
+
     return Number(valorTexto)
   }
 
