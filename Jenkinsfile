@@ -25,7 +25,8 @@ pipeline {
 
     stage('Run Cypress Tests') {
       steps {
-        bat 'npx cypress run --browser electron --reporter junit --reporter-options "mochaFile=results/test-results-[hash].xml,toConsole=true"'
+        bat 'if not exist results mkdir results'
+        bat 'npx cypress run --browser electron --headless --reporter junit --reporter-options "mochaFile=results/test-results-[hash].xml,toConsole=true"'
       }
     }
   }
